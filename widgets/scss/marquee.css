@@ -26,10 +26,10 @@
   display: flex;
 }
 .figmentasold .figmentasold-inner {
-  height: 683px;
+  height: 546.55px;
   width: 100%;
   display: flex;
-  animation: marqueesold 20s linear infinite;
+  animation: marqueesold 10s linear infinite;
 }
 .figmentasold .figmentasold-product {
   height: 100%;
@@ -58,10 +58,10 @@
     display: flex;
   }
   .figmentasold .figmentasold-inner {
-    height: 683px;
+    height: 546.55px;
     width: 100%;
     display: flex;
-    animation: marqueesold 20s linear infinite;
+    animation: marqueesold 10s linear infinite;
   }
   .figmentasold .figmentasold-product {
     height: 100%;

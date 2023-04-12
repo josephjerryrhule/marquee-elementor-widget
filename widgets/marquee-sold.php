@@ -48,29 +48,22 @@ class marquee_sold extends Widget_Base
       ]
     );
 
-    $this->add_control(
-      'product_category',
+    $repeater = new \Elementor\Repeater();
+
+    $repeater->add_control(
+      'list_title',
       [
-        'label' => __('Product Category', 'figmenta'),
-        'type' => \Elementor\Controls_Manager::SELECT2,
-        'options' => $this->get_product_categories(),
-        'multiple' => true,
+        'label' => __('Image Title', 'figmenta'),
+        'type' => \Elementor\Controls_Manager::TEXT,
+        'default' => __('Image Item #1', 'figmenta'),
+        'label_block' => true,
       ]
     );
 
-    $this->add_control(
-      'numberposts',
-      [
-        'label' => __('Number of Products to Display', 'figmenta'),
-        'type' => \Elementor\Controls_Manager::NUMBER,
-        'default' => __('6', 'figmenta'),
-      ]
-    );
-
-    $this->add_control(
+    $repeater->add_control(
       'image',
       [
-        'label' => __('Sold Out Badge Image', 'figmenta'),
+        'label' => __('Images', 'figmenta'),
         'type' => \Elementor\Controls_Manager::MEDIA,
         'default' => [
           'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -79,62 +72,46 @@ class marquee_sold extends Widget_Base
     );
 
 
+    $this->add_control(
+      'list',
+      [
+        'label' => __('Image List', 'figmenta'),
+        'type' => \Elementor\Controls_Manager::REPEATER,
+        'fields' => $repeater->get_controls(),
+        'default' => [
+          [
+            'list_title' => __('Image Title #1', 'figmenta'),
+          ],
+          [
+            'list_title' => __('Image Title #2', 'figmenta'),
+          ],
+          [
+            'list_title' => __('Image Title #3', 'figmenta'),
+          ],
+        ],
+        'title_field' => '{{{ list_title }}}'
+      ]
+    );
+
+
     $this->end_controls_section();
   }
 
-  private function get_product_categories()
-  {
-    $categories = get_terms('product_cat', [
-      'hide_empty' => true,
-    ]);
-    $options = [];
-    foreach ($categories as $category) {
-      $options[$category->term_id] = $category->name;
-    }
-    return $options;
-  }
 
   protected function render()
   {
     $settings = $this->get_settings_for_display();
-    $product_category = $settings['product_category'];
-    $limit = $settings['numberposts'];
-    $imageurl = $settings['image']['url'];
-    $query_args = [
-      'post_type' => 'product',
-      'post_status' => 'publish',
-      'posts_per_page' => $limit,
-      'tax_query' => [
-        [
-          'taxonomy' => 'product_cat',
-          'field' => 'term_id',
-          'terms' => $product_category,
-          'operator' => 'IN',
-        ],
-      ],
-      'meta_query' => [
-        [
-          'key' => '_stock_status',
-          'value' => 'outofstock',
-          'compare' => '=',
-        ],
-      ],
-    ];
+    $list = $settings['list'];
 
-    $products = new \WC_Product_Query($query_args);
-
-    if ($products->get_products()) {
+    if ($list) {
 ?>
       <div class="figmentasold">
         <div class="figmentasold-inner">
           <?php
-          foreach ($products->get_products() as $product) {
-            $productimage_url = wp_get_attachment_image_src($product->get_image_id(), 'full')[0];
+          foreach ($list as $index => $item) {
           ?>
-            <div class="figmentasold-product" style="background-image: url('<?php echo esc_url($productimage_url); ?>');">
-              <div class="figmentasold-title">
-                <img src="<?php echo esc_url($imageurl); ?>" alt="Sold Badge">
-              </div>
+            <div class="figmentasold-product" style="background-image: url('<?php echo esc_url($item['image']['url']); ?>');">
+
             </div>
           <?php
           }
