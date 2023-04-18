@@ -33,19 +33,13 @@
     height: 546.55px;
     width: 100%;
     display: flex;
-    animation: marqueesold 5s linear infinite;
+    animation: marqueesold 60s linear infinite;
   }
 
   .figmentasold-product {
     height: 100%;
-    width: 461px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: end;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-right: 40px;
+    width: 351.78px;
+    margin-right: 49px;
   }
 }
 
@@ -66,21 +60,15 @@
     display: flex;
 
     .figmentasold-inner {
-      height: 546.55px;
+      height: auto !important;
       width: 100%;
       display: flex;
-      animation: marqueesold 5s linear infinite;
+      animation: marqueesold 60s linear infinite;
     }
 
     .figmentasold-product {
       height: 100%;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      justify-content: end;
-      background-repeat: no-repeat;
-      background-size: cover;
       margin-right: 0px;
     }
   }

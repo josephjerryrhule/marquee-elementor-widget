@@ -110,8 +110,8 @@ class marquee_sold extends Widget_Base
           <?php
           foreach ($list as $index => $item) {
           ?>
-            <div class="figmentasold-product" style="background-image: url('<?php echo esc_url($item['image']['url']); ?>');">
-
+            <div class="figmentasold-product">
+              <img src="<?php echo esc_url($item['image']['url']); ?>" alt="<?php echo $item['list_title']; ?>" class="w-full h-full">
             </div>
           <?php
           }
