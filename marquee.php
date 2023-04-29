@@ -11,6 +11,7 @@
 namespace MARQUEE\ElementorWidgets;
 
 use MARQUEE\ElementorWidgets\Widgets\marquee_images;
+use MARQUEE\ElementorWidgets\Widgets\marquee_imagine;
 use MARQUEE\ElementorWidgets\Widgets\marquee_sold;
 
 if (!defined('ABSPATH')) {
@@ -55,10 +56,12 @@ final class Marquee
     //Require Widgets Directory
     require_once __DIR__ . '/widgets/marquee-images.php';
     require_once __DIR__ . '/widgets/marquee-sold.php';
+    require_once __DIR__ . '/widgets/marquee-imagine.php';
 
     //Instantiate Widgets
     $widgets_manager->register(new marquee_images());
     $widgets_manager->register(new marquee_sold());
+    $widgets_manager->register(new marquee_imagine());
   }
 }
 Marquee::get_instance();
